@@ -1,7 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./VideoPlayer.css";
-import { CiPlay1, CiPause1, CiVolumeHigh, CiVolumeMute } from "react-icons/ci";
+import { MdOutlineFullscreen } from "react-icons/md";
+import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
 const VideoPlayer = () => {
   const [isControlCenterVisible, setIsControlCenterVisible] =
@@ -9,7 +10,11 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [isMuted, setIsMuted] = useState<Boolean>(false);
   const [volume, setVolume] = useState<number>(0.5);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const playerRef = useRef<any>(null);
+  const videoContainerRef = useRef<any>(null);
+  const [isFullScreen, setIsFullScreen] = useState<Boolean>(false);
 
   const handleToggleControlCenter = (showControlCenter: any) => {
     console.log("entering");
@@ -34,6 +39,39 @@ const VideoPlayer = () => {
     }
   };
 
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const time = parseFloat(e.target.value);
+    playerRef.current.currentTime = time;
+    setCurrentTime(time);
+  };
+
+  const renderCurrentTime = () => {
+    let minutesCC: any = Math.floor(currentTime / 60);
+    const hoursCC = Math.floor(minutesCC / 60)
+      .toString()
+      .padStart(2, "0");
+    const secondsCC = Math.floor(currentTime % 60)
+      .toString()
+      .padStart(2, "0");
+    minutesCC = minutesCC.toString().padStart(2, "0");
+
+    return `${hoursCC}:${minutesCC}:${secondsCC}`;
+  };
+
+  const renderTotalTime = () => {
+    const totalTime = parseFloat(playerRef.current.duration);
+    let minutesTT: any = Math.floor(totalTime / 60);
+    const hoursTT = Math.floor(minutesTT / 60)
+      .toString()
+      .padStart(2, "0");
+    const secondsTT = Math.floor(totalTime % 60)
+      .toString()
+      .padStart(2, "0");
+    minutesTT = minutesTT.toString().padStart(2, "0");
+
+    return `${hoursTT}:${minutesTT}:${secondsTT}`;
+  };
+
   const handleTogglePlayPause = (nowPlay: any) => {
     if (playerRef.current) {
       if (nowPlay) {
@@ -45,40 +83,135 @@ const VideoPlayer = () => {
       }
     }
   };
+
+  const handlePlaybackSpeedChange = (speed: number) => {
+    setPlaybackSpeed(speed);
+  };
+
+  const handlePlayerClick = () => {
+    setIsPlaying((prev: Boolean) => {
+      if (prev) {
+        playerRef.current.pause();
+        return false;
+      } else {
+        playerRef.current.play();
+        return true;
+      }
+    });
+  };
+
+  const handleToggleFullScreen = () => {
+    if (playerRef.current) {
+      if (!document.fullscreenElement) {
+        videoContainerRef.current
+          .requestFullscreen()
+          .then(() => {
+            playerRef.current.style.objectFit = "fill";
+            setIsFullScreen(true);
+          })
+          .catch((err: any) => {
+            console.log(
+              `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+            );
+          });
+      } else {
+        document.exitFullscreen();
+        playerRef.current.style.objectFit = "contain";
+        setIsFullScreen(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.playbackRate = playbackSpeed;
+    }
+  }, [playbackSpeed]);
+
+  useEffect(() => {
+    let mouseTimer: any;
+    const handleMouseMove = () => {
+      if (!document.fullscreenElement) {
+        return;
+      }
+      handleToggleControlCenter(true);
+      clearTimeout(mouseTimer);
+      mouseTimer = setTimeout(() => {
+        handleToggleControlCenter(false);
+      }, 2500);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      clearTimeout(mouseTimer);
+    };
+  }, []);
+
   return (
     <div
       className="player-cnt"
-      onMouseEnter={() => handleToggleControlCenter(true)}
-      onMouseLeave={() => handleToggleControlCenter(false)}
+      onMouseEnter={
+        !isFullScreen ? () => handleToggleControlCenter(true) : () => {}
+      }
+      onMouseLeave={
+        !isFullScreen ? () => handleToggleControlCenter(true) : () => {}
+      }
+      ref={videoContainerRef}
     >
-      <video ref={playerRef} width="70%" className="player" controls={false}>
+      <video
+        ref={playerRef}
+        width="70%"
+        className="player"
+        controls={false}
+        onClick={handlePlayerClick}
+        onTimeUpdate={() => setCurrentTime(playerRef.current.currentTime)}
+      >
         <source src="/DEVENDRA.mp4" type="video/mp4" />
       </video>
       {isControlCenterVisible && <div className="control-cnt-bg"></div>}
       {isControlCenterVisible && (
         <div className="control-cnt">
-          <div className="control-cnt--left">
+          <div className="control-play-seek">
             {isPlaying ? (
-              <CiPause1
+              <FaPause
                 className="control-btn"
                 onClick={() => handleTogglePlayPause(false)}
               />
             ) : (
-              <CiPlay1
+              <FaPlay
                 className="control-btn"
                 onClick={() => handleTogglePlayPause(true)}
               />
             )}
+            <div className="control-seek-time-cnt">
+              <span className="current-time">
+                {playerRef.current ? renderCurrentTime() : `00:00`}
+              </span>
+              <input
+                type="range"
+                min={0}
+                max={playerRef.current ? playerRef.current.duration : 0}
+                step={0.01}
+                value={currentTime}
+                onChange={handleSeek}
+                className="seek-bar"
+              />
+              <span className="total-time">
+                {playerRef.current ? renderTotalTime() : `00:00`}
+              </span>
+            </div>
           </div>
           <div className="control-cnt--right">
             <div className="volume-control">
               {isMuted ? (
-                <CiVolumeMute
+                <FaVolumeMute
                   className="control-btn"
                   onClick={handleToggleMute}
                 />
               ) : (
-                <CiVolumeHigh
+                <FaVolumeUp
                   className="control-btn"
                   onClick={handleToggleMute}
                 />
@@ -93,6 +226,22 @@ const VideoPlayer = () => {
                 className="volume-slider"
               />
             </div>
+            <select
+              className="speed-selector"
+              value={playbackSpeed}
+              onChange={(e) =>
+                handlePlaybackSpeedChange(parseFloat(e.target.value))
+              }
+            >
+              <option value={0.5}>0.5x</option>
+              <option value={1}>1x</option>
+              <option value={1.5}>1.5x</option>
+              <option value={2}>2x</option>
+            </select>
+            <MdOutlineFullscreen
+              className="control-btn"
+              onClick={handleToggleFullScreen}
+            />
           </div>
         </div>
       )}
