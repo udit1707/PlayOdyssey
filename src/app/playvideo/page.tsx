@@ -2,11 +2,10 @@
 import Header from "@/components/Header/Header";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { videoArr } from "@/utils/constant";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PlayVideo = () => {
-  // const router = useRouter();
   const [currentVideo, setCurrentVideo] = useState<any>(null);
   const [currentRuntime, setCurrentRuntime] = useState<any>(null);
   const searchParams = useSearchParams();
