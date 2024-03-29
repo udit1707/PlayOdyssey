@@ -79,7 +79,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       .padStart(2, "0");
     minutesTT = minutesTT.toString().padStart(2, "0");
 
-    return `${hoursTT}:${minutesTT}:${secondsTT}`;
+    return isNaN(Number(secondsTT))
+      ? `00:00:00`
+      : `${hoursTT}:${minutesTT}:${secondsTT}`;
   };
 
   const handleTogglePlayPause = (nowPlay: any) => {
@@ -214,7 +216,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             )}
             <div className="control-seek-time-cnt">
               <span className="current-time">
-                {playerRef.current ? renderCurrentTime() : `00:00`}
+                {playerRef.current ? renderCurrentTime() : `00:00:00`}
               </span>
               <input
                 type="range"
@@ -226,7 +228,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 className="seek-bar"
               />
               <span className="total-time">
-                {playerRef.current ? renderTotalTime() : `00:00`}
+                {playerRef.current ? renderTotalTime() : `00:00:00`}
               </span>
             </div>
           </div>

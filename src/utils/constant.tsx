@@ -65,7 +65,7 @@ export const videoArr = [
     thumbnail:
       "https://storage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
     videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.jpg",
+      "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
     title: "Sintel",
   },
   {
