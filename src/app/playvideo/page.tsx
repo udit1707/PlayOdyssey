@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 const PlayVideo = () => {
   const [currentVideo, setCurrentVideo] = useState<any>(null);
+  const [currentVideoTitle, setCurrentVideoTitle] = useState<any>("");
   const [currentRuntime, setCurrentRuntime] = useState<any>(null);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -15,6 +16,7 @@ const PlayVideo = () => {
     if (id) {
       const video = videoArr.find((i) => i.id === Number(id));
       setCurrentVideo(video?.videosrc);
+      setCurrentVideoTitle(video?.title);
       const nowPlaying = localStorage.getItem("nowplaying");
       if (nowPlaying) {
         const nowPlayingArr = JSON.parse(nowPlaying);
@@ -37,7 +39,7 @@ const PlayVideo = () => {
 
   return (
     <div className="home-cnt">
-      <Header title="Now Playing..." />
+      <Header title={`Now Playing: ${currentVideoTitle}`} showHomeBtn={true} />
       {currentVideo && (
         <VideoPlayer
           id={id}

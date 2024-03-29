@@ -17,6 +17,7 @@ const PlayHome = () => {
           <VideoCard
             key={index}
             src={i.thumbnail}
+            title={i.title}
             onClick={() => handleThumbnailClick(index)}
           />
         );

@@ -1,5 +1,5 @@
 .cnt {
-  color: red;
+  color: #adff00;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -96,8 +96,8 @@
   -webkit-appearance: none;
   height: 5px;
   cursor: ew-resize;
-  background: red;
-  box-shadow: -1920px 0 0 1920px rgb(198, 46, 46);
+  background: #1f1f1f;
+  box-shadow: -1920px 0 0 1920px #adff00;
   cursor: pointer;
 }
 
@@ -106,8 +106,8 @@
   -webkit-appearance: none;
   height: 5px;
   cursor: ew-resize;
-  background: red;
-  box-shadow: -80px 0 0 80px rgb(198, 46, 46);
+  background: #1f1f1f;
+  box-shadow: -80px 0 0 80px #adff00;
   cursor: pointer;
 }
 
@@ -127,18 +127,18 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-runnable-track {
   height: 5px;
   -webkit-appearance: none;
-  color: red;
+  color: #adff00;
   margin-top: -1px;
 }
 
 input[type="range"]::-moz-range-progress {
-  background-color: red;
+  background-color: #adff00;
 }
 input[type="range"]::-moz-range-track {
   background-color: grey;
 }
 input[type="range"]::-ms-fill-lower {
-  background-color: red;
+  background-color: #adff00;
 }
 input[type="range"]::-ms-fill-upper {
   background-color: grey;
