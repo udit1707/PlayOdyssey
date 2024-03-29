@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </Suspense>
+    <html lang="en">
+      <body>
+        <Suspense>{children}</Suspense>
+      </body>
+    </html>
   );
 }
