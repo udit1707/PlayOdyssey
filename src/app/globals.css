@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -30,4 +30,19 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+} */
+
+body {
+  overflow: hidden;
+}
+
+.home-cnt {
+  background-color: #1f1f1f;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: hidden;
 }

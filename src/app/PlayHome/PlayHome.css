@@ -1,12 +1,10 @@
-.home-cnt {
+.tiles-cnt {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  background-color: #1f1f1f;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  margin-top: 20px;
+  height: 92%;
+  overflow-y: scroll;
+  justify-content: center;
   padding: 30px 30px 30px;
 }
