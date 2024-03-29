@@ -1,6 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+PlayOdyssey is a cutting-edge web playlist manager and player meticulously crafted to redefine your video streaming experience. At the heart of PlayOdyssey lies a custom-built video player, engineered with advanced functionalities to elevate user engagement and satisfaction. Seamlessly resume playback from where you left off, toggle play/pause dynamically, seek effortlessly, and adjust playback speeds at your convenience. Our dedication to performance optimization and memory management ensures lightning-fast responsiveness and stability, even with large video files. Whether you're on a desktop or mobile device, PlayOdyssey adapts seamlessly to your screen size, providing an immersive and enjoyable viewing experience. 
+
+## Setup
 
 First, run the development server:
 
@@ -16,21 +17,29 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Playlist Home: Designed with responsiveness in mind using Flexbox, ensuring an optimal viewing experience across various devices.
+- Reorder Playlist Mode: Implemented a new feature allowing users to enter a reorder playlist mode, enabling them to drag and drop tiles to reorder their playlist. Users can exit and save their custom order, enhancing personalization and control over their playlists.
+- Interactive Playlist: Facilitated a seamless transition from the playlist to the video player by enabling users to click on a video and instantly load and play it.
+- Custom Video Player: Developed a bespoke video player with a plethora of functionalities to enhance user interaction:
+  - Play/Pause Toggle
+  - Seek Functionality
+  - Timer Display
+  - Playback Speed Adjustment
+  - Resuming Playback
+  - Volume Controls
+  - FullScreen Mode Toggle
 
-## Learn More
+## Redorder Playlist Demo 
 
-To learn more about Next.js, take a look at the following resources:
+https://github.com/udit1707/PlayOdyssey/assets/43987867/9e10ba06-0de4-4c05-91df-19cbf9ce42ba
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Screens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<img width="646" alt="Screenshot 2024-03-29 172118" src="https://github.com/udit1707/PlayOdyssey/assets/43987867/d7fa3d36-737d-4ae3-b568-975333c0ab39">
+<img width="785" alt="Screenshot 2024-03-29 172131" src="https://github.com/udit1707/PlayOdyssey/assets/43987867/86a11ade-20b4-4bdd-bed1-720aa519d674">
+<img width="790" alt="Screenshot 2024-03-29 172143" src="https://github.com/udit1707/PlayOdyssey/assets/43987867/3a253b62-6eea-40ab-bc39-17805945b36a">
+<img width="790" alt="Screenshot 2024-03-29 172174" src="https://github.com/udit1707/PlayOdyssey/assets/43987867/587049c3-52a6-4d8f-86a9-4281203d374a">
+<img width="1078" alt="Screenshot 2024-03-29 174051" src="https://github.com/udit1707/PlayOdyssey/assets/43987867/52e139cd-e6c8-43a1-9201-e247a5302966">
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
