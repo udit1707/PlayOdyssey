@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,forwardRef } from "react";
 import "./VideoCard.css";
 import { FaPlay } from "react-icons/fa";
 
@@ -7,10 +7,12 @@ interface VideoCardProps {
   src: string;
   title: string;
   className?: any;
-  onClick: any;
+  onClick?: any;
+  style?:any;
+  ref?:any;
 }
 
-const VideoCard: React.FC<VideoCardProps> = ({ src, className, onClick,title }) => {
+const VideoCard: React.ForwardRefRenderFunction<HTMLDivElement, VideoCardProps> = ({ src, className, onClick,title,style,...props },ref) => {
   const [isMouseEnter, setIsMouseEnter] = useState<Boolean>(false);
   return (
     <div
@@ -22,6 +24,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ src, className, onClick,title }) 
       onClick={onClick}
       onMouseEnter={() => setIsMouseEnter(true)}
       onMouseLeave={() => setIsMouseEnter(false)}
+      style={style && {...style}}
+      ref={ref}
+      {...props}
     >
       {isMouseEnter && (
         <div className="hover-overlay">
@@ -41,4 +46,4 @@ const VideoCard: React.FC<VideoCardProps> = ({ src, className, onClick,title }) 
   );
 };
 
-export default VideoCard;
+export default forwardRef(VideoCard);

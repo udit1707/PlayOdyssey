@@ -46,3 +46,34 @@ body {
   height: 100vh;
   overflow-y: hidden;
 }
+
+.reorder-btn-cnt {
+  display: flex;
+  margin-top: 52px;
+  align-items: center;
+  padding: 20px;
+}
+
+.reorder-info-text {
+  padding: 5px;
+    color: #1f1f1f;
+    font-size: 18px;
+    background-color: #adff00;
+    border-radius: 3px;
+}
+
+.reorder-btn {
+  margin-left: auto;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #adff00;
+    cursor: pointer;
+    color: #adff00;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.reorder-btn--save {
+  margin-left: 0;
+}
