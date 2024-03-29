@@ -4,7 +4,6 @@ import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { videoArr } from "@/utils/constant";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Suspense } from "react";
 
 const PlayVideo = () => {
   const [currentVideo, setCurrentVideo] = useState<any>(null);
@@ -39,21 +38,16 @@ const PlayVideo = () => {
   }, [id]);
 
   return (
-    <Suspense>
-      <div className="home-cnt">
-        <Header
-          title={`Now Playing: ${currentVideoTitle}`}
-          showHomeBtn={true}
+    <div className="home-cnt">
+      <Header title={`Now Playing: ${currentVideoTitle}`} showHomeBtn={true} />
+      {currentVideo && (
+        <VideoPlayer
+          id={id}
+          src={currentVideo}
+          currentRuntime={currentRuntime}
         />
-        {currentVideo && (
-          <VideoPlayer
-            id={id}
-            src={currentVideo}
-            currentRuntime={currentRuntime}
-          />
-        )}
-      </div>
-    </Suspense>
+      )}
+    </div>
   );
 };
 
