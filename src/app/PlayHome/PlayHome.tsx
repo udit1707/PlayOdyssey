@@ -1,83 +1,28 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import "./PlayHome.css";
-import VideoCard from "../VideoCard/VideoCard";
-
-const videoArr = [
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.jpg",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
-  },
-  {
-    thumbnail:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg",
-    videosrc:
-      "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-  },
-];
+import VideoCard from "../../components/VideoCard/VideoCard";
+import { useRouter } from "next/navigation";
+import Header from "@/components/Header/Header";
+import { videoArr } from "@/utils/constant";
 
 const PlayHome = () => {
   const [currentVideo, setCurrentVideo] = useState<string>("");
+  const router = useRouter();
+
   const handleThumbnailClick = (idx: number) => {
     setCurrentVideo(videoArr[idx].videosrc);
+    router.push(`/playvideo?id=${videoArr[idx].id}`);
   };
   return (
-    <div className="home-cnt">
+    <div className="tiles-cnt">
       {videoArr.map((i, index) => {
         return (
           <VideoCard
+            key={index}
             src={i.thumbnail}
             onClick={() => handleThumbnailClick(index)}
+
           />
         );
       })}
