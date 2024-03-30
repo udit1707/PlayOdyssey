@@ -1,9 +1,3 @@
 .tiles-cnt {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  height: 84%;
-  overflow-y: scroll;
-  justify-content: center;
-  padding: 0 30px 30px;
+  @apply flex flex-wrap items-stretch h-[84%] overflow-y-scroll justify-center pt-0 pb-[30px] px-[30px];
 }

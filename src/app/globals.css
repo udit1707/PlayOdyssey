@@ -1,79 +1,39 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
-body {
-  overflow: hidden;
+  @apply overflow-hidden;
 }
 
 .home-cnt {
-  background-color: #1f1f1f;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
-  overflow-y: hidden;
+  @apply bg-[#1f1f1f] absolute h-screen overflow-y-hidden inset-0;
 }
 
 .reorder-btn-cnt {
-  display: flex;
-  margin-top: 52px;
-  align-items: center;
-  padding: 20px;
+  @apply flex items-center mt-[52px] p-[20px];
 }
 
 .reorder-info-text {
-  padding: 5px;
-    color: #1f1f1f;
-    font-size: 18px;
-    background-color: #adff00;
-    border-radius: 3px;
+  @apply text-[#1f1f1f] text-lg bg-[#adff00] p-[5px] rounded-[3px] mr-[3px];
 }
 
 .reorder-btn {
-  margin-left: auto;
-    padding: 8px;
-    border-radius: 8px;
-    border: 2px solid #adff00;
-    cursor: pointer;
-    color: #adff00;
-    margin-right: 10px;
-    font-size: 18px;
-    font-weight: 500;
+  @apply cursor-pointer text-[#adff00] text-lg font-medium ml-auto mr-[10px] p-[8px] rounded-lg border-2 border-solid border-[#adff00];
 }
 
 .reorder-btn--save {
-  margin-left: 0;
+  @apply ml-0;
+}
+
+.playlist-loader {
+  @apply !absolute top-[50%] left-[50%];
+  transform: translate(-50%, -50%);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #adff00;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: #1f1f1f;
 }

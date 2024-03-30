@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import "./VideoPlayer.css";
 import { MdOutlineFullscreen } from "react-icons/md";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import PuffLoader from "react-spinners/PuffLoader";
 
 interface VideoPlayerProps {
   id: any;
@@ -27,6 +28,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const playerRef = useRef<any>(null);
   const videoContainerRef = useRef<any>(null);
   const [isFullScreen, setIsFullScreen] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   const handleToggleControlCenter = (showControlCenter: any) => {
     setIsControlCenterVisible(showControlCenter);
@@ -177,6 +179,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
   }, [currentTime]);
 
+  useEffect(() => {
+    if (playerRef.current) {
+      playerRef.current.addEventListener("loadeddata", () => {
+        setIsLoading(false); // Set loading state to false when video has finished loading
+      });
+    }
+  }, []);
+
   return (
     <div
       className="player-cnt"
@@ -188,6 +198,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       }
       ref={videoContainerRef}
     >
+      {isLoading && (
+        <PuffLoader color="#adff00" size={200} className="playlist-loader" />
+      )}
+
       <video
         ref={playerRef}
         width="70%"
