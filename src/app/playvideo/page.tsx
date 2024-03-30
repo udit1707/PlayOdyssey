@@ -15,6 +15,10 @@ const PlayVideo = () => {
   useEffect(() => {
     if (id) {
       const video = videoArr.find((i) => i.id === Number(id));
+      if (localStorage.getItem("lastPlayed")) {
+        localStorage.removeItem("lastPlayed");
+      }
+      localStorage.setItem("lastPlayed", id);
       setCurrentVideo(video?.videosrc);
       setCurrentVideoTitle(video?.title);
       const nowPlaying = localStorage.getItem("nowplaying");

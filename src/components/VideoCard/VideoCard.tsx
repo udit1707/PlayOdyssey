@@ -10,9 +10,10 @@ interface VideoCardProps {
   onClick?: any;
   style?:any;
   ref?:any;
+  lastPlayed?:Boolean
 }
 
-const VideoCard: React.ForwardRefRenderFunction<HTMLDivElement, VideoCardProps> = ({ src, className, onClick,title,style,...props },ref) => {
+const VideoCard: React.ForwardRefRenderFunction<HTMLDivElement, VideoCardProps> = ({ lastPlayed,src, className, onClick,title,style,...props },ref) => {
   const [isMouseEnter, setIsMouseEnter] = useState<Boolean>(false);
   return (
     <div
@@ -20,6 +21,7 @@ const VideoCard: React.ForwardRefRenderFunction<HTMLDivElement, VideoCardProps> 
         "video-card",
         className && className,
         isMouseEnter && "video-card--hover",
+        lastPlayed && "last-played-mark"
       ].join(" ")}
       onClick={onClick}
       onMouseEnter={() => setIsMouseEnter(true)}

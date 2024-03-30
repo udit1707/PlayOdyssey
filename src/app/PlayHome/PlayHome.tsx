@@ -26,6 +26,7 @@ interface PlayHomeProps {
   isReordermode: Boolean;
   order: any;
   setOrder: any;
+  lastPlayedId: any;
 }
 
 const PlayHome: React.FC<PlayHomeProps> = ({
@@ -33,6 +34,7 @@ const PlayHome: React.FC<PlayHomeProps> = ({
   videoArr,
   order,
   setOrder,
+  lastPlayedId,
 }) => {
   const router = useRouter();
   const sensors = useSensors(
@@ -69,6 +71,7 @@ const PlayHome: React.FC<PlayHomeProps> = ({
               src={i.thumbnail}
               title={i.title}
               onClick={() => handleThumbnailClick(index)}
+              lastPlayed={i.id === lastPlayedId}
             />
           );
         })}
@@ -76,25 +79,27 @@ const PlayHome: React.FC<PlayHomeProps> = ({
     );
   } else {
     return (
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={order} strategy={rectSortingStrategy}>
-          <div className="tiles-cnt">
-            {order.map((i: any, index: number) => (
-              <SortableVideoCard
-                key={index}
-                id={i.id}
-                src={i.thumbnail}
-                title={i.title}
-              />
-            ))}
-          </div>
-        </SortableContext>
-        <DragOverlay />
-      </DndContext>
+      <div className="scrollable-dnd">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={order} strategy={rectSortingStrategy}>
+            <div className="tiles-cnt--scrollable">
+              {order.map((i: any, index: number) => (
+                <SortableVideoCard
+                  key={index}
+                  id={i.id}
+                  src={i.thumbnail}
+                  title={i.title}
+                />
+              ))}
+            </div>
+          </SortableContext>
+          <DragOverlay />
+        </DndContext>
+      </div>
     );
   }
 };

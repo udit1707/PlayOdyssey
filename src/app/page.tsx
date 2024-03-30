@@ -9,6 +9,7 @@ export default function Home() {
   const [isReordermode, setIsReorderMode] = useState<Boolean>(false);
   const [items, setItems] = useState<any>(null);
   const [order, setOrder] = useState<any>(videoArr);
+  const [lastPlayedId,setLastPlayedId] = useState<any>(null);
 
   const handleToggleReorder = () => {
     setIsReorderMode((prev) => !prev);
@@ -31,6 +32,11 @@ export default function Home() {
       setItems(JSON.parse(lastSavedPlaylist));
     } else {
       setItems(videoArr);
+    }
+    const lastPlayedId = localStorage.getItem("lastPlayed");
+    if(lastPlayedId)
+    {
+      setLastPlayedId(Number(lastPlayedId));
     }
   }, []);
 
@@ -62,6 +68,7 @@ export default function Home() {
         videoArr={items}
         order={order}
         setOrder={setOrder}
+        lastPlayedId={lastPlayedId}
       />:<PuffLoader color="#adff00" size={200} className="playlist-loader"/>}
     </div>
   );

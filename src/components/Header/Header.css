@@ -1,5 +1,5 @@
 .header-cnt {
-  @apply flex absolute justify-center text-[#1f1f1f] h-[35px] p-[5px] tracking-[5px] bg-[#adff00] text-3xl font-[750] top-0 inset-x-0;
+  @apply flex fixed justify-center text-[#1f1f1f] h-[35px] p-[5px] tracking-[5px] bg-[#adff00] text-3xl font-[750] top-0 inset-x-0;
 }
 
 .home-btn {

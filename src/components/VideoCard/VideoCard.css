@@ -21,3 +21,7 @@
 .overlay-title {
   @apply text-[white] text-sm font-semibold;
 }
+
+.last-played-mark {
+  @apply bg-[#adff00];
+}

@@ -1,3 +1,11 @@
 .tiles-cnt {
   @apply flex flex-wrap items-stretch h-[84%] overflow-y-scroll justify-center pt-0 pb-[30px] px-[30px];
 }
+
+.tiles-cnt--scrollable {
+  @apply flex flex-wrap items-stretch h-[100%] justify-center pt-0 pb-[30px] px-[30px];
+}
+
+.scrollable-dnd {
+  @apply h-[85%] overflow-y-scroll;
+}
