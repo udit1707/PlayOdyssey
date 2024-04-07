@@ -182,7 +182,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     if (playerRef.current) {
       playerRef.current.addEventListener("loadeddata", () => {
-        setIsLoading(false); // Set loading state to false when video has finished loading
+        setIsLoading(false);
       });
     }
   }, []);
@@ -211,10 +211,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         onTimeUpdate={() => setCurrentTime(playerRef.current.currentTime)}
       >
         <source src={src} type="video/mp4" />
-        {/* <source src="/DEVENDRA.mp4" type="video/mp4" /> */}
       </video>
-      {isControlCenterVisible && <div className="control-cnt-bg"></div>}
-      {isControlCenterVisible && (
+      {isControlCenterVisible && !isLoading && <div className="control-cnt-bg"></div>}
+      {isControlCenterVisible && !isLoading && (
         <div className="control-cnt">
           <div className="control-play-seek">
             {isPlaying ? (
